@@ -7,6 +7,7 @@ from . import ChaseBallConstants as constants
 from ..util import *
 from ..kickDecider import kicks
 from ..navigator import Navigator
+from objects import Location
 
 @superState('positionAndKickBall')
 def executeMotionKick(player):
@@ -61,6 +62,7 @@ def afterKick(player):
     """
     if player.firstFrame():
         player.stand()        # stand up right, ready to walk
+        player.brain.nav.goTo(Location(kicks.destinationX, kick.destinationY))
         player.brain.tracker.afterKickScan(player.kick.name)
         return player.stay()
 
